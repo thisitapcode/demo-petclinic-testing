@@ -1,16 +1,15 @@
-- pipeline: testing
-  name: Testing
+- pipeline: "Build and Test Java 17"  # Tên pipeline mới
+  on: "PUSH"
   refs:
-  - refs/heads/main
-  events:
-  - type: WEBHOOK
+  - "refs/heads/main"
+
   actions:
-  - action: ./mvnw clean package
-    type: BUILD
-    docker_image_name: library/maven
-    docker_image_tag: 3-eclipse-temurin-17  # <-- ĐỔI THÀNH CÁI NÀY
+  - name: "Run Maven Tests (Java 17)"
+    type: "BUILD"                     # Buddy nó hiểu type: BUILD là Maven/Java
+    docker_image_name: "maven"        # Tên image
+    docker_image_tag: "3-eclipse-temurin-17" # Tag CHUẨN CÓ JAVA 17
+
     execute_commands:
-    - ./mvnw clean package
-    cached_dirs:
-    - /root/.m2/repository
-    shell: BASH
+    - "./mvnw clean package"           # Lệnh chạy
+
+    shell: "BASH"
