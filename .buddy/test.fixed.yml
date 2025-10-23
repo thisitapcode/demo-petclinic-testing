@@ -1,4 +1,6 @@
 - pipeline: testing
   name: Testing
+  refs:
+  - refs/heads/main
   events:
   - type: WEBHOOK
