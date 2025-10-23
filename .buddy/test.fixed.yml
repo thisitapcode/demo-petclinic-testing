@@ -1,0 +1,16 @@
+# File: .buddy/Build-and-test.fixed.yml
+
+pipelines:
+- name: "Build-and-test"   # Tên pipeline của bro
+  on: "PUSH"             # Kích hoạt khi PUSH
+  refs:
+  - "refs/heads/main"   # Chỉ chạy cho nhánh main
+
+  actions:
+  # Đây là action chạy test
+  - name: "Run Maven Tests (Java 17)"
+    type: "MAVEN"                         # Loại action là MAVEN
+    image: "maven:3-eclipse-temurin-17"   # <-- CHÌA KHÓA LÀ ĐÂY!
+                                        # Bắt nó dùng image MAVEN 3 + JAVA 17
+    commands:
+    - "./mvnw clean package"           # Lệnh chạy test và build
